@@ -595,10 +595,10 @@ MAKEFLAGS=
 SHELL=${CONFIG_SHELL-/bin/sh}
 
 # Identity of this package.
-PACKAGE_NAME='bash'
-PACKAGE_TARNAME='bash'
+PACKAGE_NAME='nsh'
+PACKAGE_TARNAME='nsh'
 PACKAGE_VERSION='4.2-release'
-PACKAGE_STRING='bash 4.2-release'
+PACKAGE_STRING='nsh 4.2-release'
 PACKAGE_BUGREPORT='bug-bash@gnu.org'
 
 ac_unique_file="shell.h"
@@ -32122,7 +32122,8 @@ $debug ||
 if test -n "$CONFIG_FILES"; then
 
 
-ac_cr=''
+ac_cr='
+'
 ac_cs_awk_cr=`$AWK 'BEGIN { print "a\rb" }' </dev/null 2>/dev/null`
 if test "$ac_cs_awk_cr" = "a${ac_cr}b"; then
   ac_cs_awk_cr='\\r'
