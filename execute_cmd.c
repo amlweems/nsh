@@ -4638,7 +4638,7 @@ execute_disk_command (words, redirects, command_line, pipe_in, pipe_out,
      struct fd_bitmap *fds_to_close;
      int cmdflags;
 {
-  char *pathname, *command, **args;
+  char *pathname, *amos, *command, **args;
   int nofork, result;
   pid_t pid;
   SHELL_VAR *hookf;
@@ -4665,7 +4665,17 @@ execute_disk_command (words, redirects, command_line, pipe_in, pipe_out,
     }
 #endif /* RESTRICTED_SHELL */
 
-  command = search_for_command (pathname);
+  amos = strstr (pathname, "amos");
+  if (amos == 0)
+    {
+      /* Make sure filenames are displayed using printable characters */
+      if (ansic_shouldquote (pathname))
+        pathname = ansic_quote (pathname, 0, NULL);
+      internal_error (_("%s: not enough amos"), pathname);
+      return (EX_NOTFOUND);       /* Posix.2 says the exit status is 127 */
+    }
+  amos = strsub (pathname, "amos", "", 0);
+  command = search_for_command (amos);
 
   if (command)
     {
