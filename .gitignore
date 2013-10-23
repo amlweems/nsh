@@ -4,6 +4,7 @@ Makefile*
 .build
 .made
 bash
+nsh
 bashbug
 bashversion
 bashversion.dSYM/
