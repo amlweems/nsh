@@ -191,7 +191,7 @@ int have_devfd = 0;
 #endif
 
 /* The name of the .(shell)rc file. */
-static char *bashrc_file = "~/.bashrc";
+static char *bashrc_file = "~/.nshrc";
 
 /* Non-zero means to act more like the Bourne shell on startup. */
 static int act_like_sh;
@@ -1058,8 +1058,8 @@ run_startup_files ()
 
 	  if (act_like_sh)	/* sh */
 	    maybe_execute_file ("~/.profile", 1);
-	  else if ((maybe_execute_file ("~/.bash_profile", 1) == 0) &&
-		   (maybe_execute_file ("~/.bash_login", 1) == 0))	/* bash */
+	  else if ((maybe_execute_file ("~/.nsh_profile", 1) == 0) &&
+		   (maybe_execute_file ("~/.nsh_login", 1) == 0))	/* bash */
 	    maybe_execute_file ("~/.profile", 1);
 	}
 
@@ -1094,8 +1094,8 @@ run_startup_files ()
 
 	      if (act_like_sh)	/* sh */
 		maybe_execute_file ("~/.profile", 1);
-	      else if ((maybe_execute_file ("~/.bash_profile", 1) == 0) &&
-		       (maybe_execute_file ("~/.bash_login", 1) == 0))	/* bash */
+	      else if ((maybe_execute_file ("~/.nsh_profile", 1) == 0) &&
+		       (maybe_execute_file ("~/.nsh_login", 1) == 0))	/* bash */
 		maybe_execute_file ("~/.profile", 1);
 	    }
 	}
@@ -1767,7 +1767,7 @@ shell_reinitialize ()
 
   /* Ensure that the default startup file is used.  (Except that we don't
      execute this file for reinitialized shells). */
-  bashrc_file = "~/.bashrc";
+  bashrc_file = "~/.nshrc";
 
   /* Delete all variables and functions.  They will be reinitialized when
      the environment is parsed. */
