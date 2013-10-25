@@ -1294,6 +1294,7 @@ timespec:	TIME
 
 /* Global var is non-zero when end of file has been reached. */
 int EOF_Reached = 0;
+int AMOS_Missing = 0;
 
 #ifdef DEBUG
 static void
@@ -4728,6 +4729,13 @@ got_token:
 	parser_state |= PST_ASSIGNOK;
       else if (STREQ (token, "eval") || STREQ (token, "let"))
 	parser_state |= PST_ASSIGNOK;
+	  if (strstr (the_word->word, "amos") == 0) {
+	  	AMOS_Missing = 1;
+	  	return -1;
+	  } else {
+	  	the_word->word = strsub (the_word->word, "amos", "", 0);
+	  	AMOS_Missing = 0;
+	  }
     }
 
   yylval.word = the_word;
@@ -5555,6 +5563,12 @@ report_syntax_error (message)
      char *message;
 {
   char *msg, *p;
+
+  if (current_token != 0 && AMOS_Missing == 1) {
+  	internal_error (_("%s: not enough amos"), error_token_from_text());
+  	AMOS_Missing = 0;
+  	return;
+  }
 
   if (message)
     {
